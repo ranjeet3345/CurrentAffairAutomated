@@ -1,0 +1,28 @@
+{% extends "app/base.html" %}
+{% load static %}
+
+{% block title %} Home {% endblock title %}
+
+{% block content %}
+
+<h3>SignUp</h3>
+
+
+{% if messages %}
+{% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+{% endfor %}
+{% endif %}
+
+<form method="post">
+{% csrf_token %}
+{{ form.as_p }}  <!-- Renders form fields with errors -->
+<button type="submit">Sign Up</button>
+</form>
+
+
+
+
+
+
+{% endblock main-content %}

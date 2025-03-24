@@ -3,34 +3,34 @@
 # It is also provided as a convenience to those who want to deploy these URLs
 # elsewhere.
 
-from django.contrib.auth import views
+
 from django.urls import path
+from . import  views as app_view
+from .forms import loginForm
+from django.contrib.auth import views as auth_view  # Ensure this does not create a recursive import
 
 urlpatterns = [
-    path("login/", views.LoginView.as_view(), name="login"),
-    path("logout/", views.LogoutView.as_view(), name="logout"),
+    path("",app_view.home,name="home"),
+    path("login/", auth_view.LoginView.as_view(template_name="login.html",authentication_form=loginForm), name="login"),
+    path("logout/", auth_view.LogoutView.as_view(template_name="logout.html"), name="logout"),
     path(
-        "password_change/", views.PasswordChangeView.as_view(), name="password_change"
+        "password_change/", auth_view.PasswordChangeView.as_view(template_name="password_change.html"), name="password_change"
     ),
     path(
-        "password_change/done/",
-        views.PasswordChangeDoneView.as_view(),
+        "password_change_done",
+        auth_view.PasswordChangeDoneView.as_view(template_name="password_change_done.html"),
         name="password_change_done",
     ),
-    path("password_reset/", views.PasswordResetView.as_view(), name="password_reset"),
-    path(
-        "password_reset/done/",
-        views.PasswordResetDoneView.as_view(),
-        name="password_reset_done",
-    ),
-    path(
-        "reset/<uidb64>/<token>/",
-        views.PasswordResetConfirmView.as_view(),
-        name="password_reset_confirm",
-    ),
-    path(
-        "reset/done/",
-        views.PasswordResetCompleteView.as_view(),
-        name="password_reset_complete",
-    ),
+
+
+
+
+
+
+
+
+
+    
+
 ]
+
